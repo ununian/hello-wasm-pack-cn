@@ -3,33 +3,33 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>概览 - Hello wasm-pack CN</title>
+        <title>new - Hello wasm-pack CN</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
     </head>
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 概览</a></li><li class="chapter-item expanded "><a href="QuickStart.html"><strong aria-hidden="true">2.</strong> 快速开始</a></li><li class="chapter-item expanded "><a href="commands/index.html"><strong aria-hidden="true">3.</strong> 命令</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="commands/new.html"><strong aria-hidden="true">3.1.</strong> new</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> 概览</a></li><li class="chapter-item expanded "><a href="../QuickStart.html"><strong aria-hidden="true">2.</strong> 快速开始</a></li><li class="chapter-item expanded "><a href="../commands/index.html"><strong aria-hidden="true">3.</strong> 命令</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../commands/new.html" class="active"><strong aria-hidden="true">3.1.</strong> new</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -107,7 +107,7 @@
                     <h1 class="menu-title">Hello wasm-pack CN</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                     </div>
@@ -134,21 +134,37 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p><img src="https://rustwasm.github.io/wasm-pack/public/img/wasm-ferris.png" alt="wasm ferris" /></p>
-<h1 style="text-align: center;">欢迎来到 <code>wasm-pack</code> 文档!</h1>
-<p>原文地址 <a href="https://rustwasm.github.io/docs/wasm-pack/">https://rustwasm.github.io/docs/wasm-pack/</a></p>
-<p>本工具旨在成为一个在浏览器、Node.js 环境中使用 Rust 的一站式工具</p>
-<p><code>wasm-pack</code> 可以将 Rust 代码打包为 WebAssembly npm 包。
-可以上传到 npm 仓库，也可以集成进现有的 JavaScript 工作流中，例如 <a href="https://webpack.js.org/">webpack</a></p>
-<p>这个项目是 <a href="https://github.com/rustwasm/team">rust-wasm</a> 的一部分. 你可以在该项目的仓库中了解到更多信息</p>
-<p><img src="https://github.com/rustwasm/wasm-pack/raw/master/demo.gif" alt="demo" /></p>
+                        <h1 id="wasm-pack-new"><a class="header" href="#wasm-pack-new">wasm-pack new</a></h1>
+<p><code>wasm-pack new</code> 命令将会为你创建一个新的 RustWasm 项目，内部是使用 <a href="https://github.com/ashleygwilliams/cargo-generate"><code>cargo-generate</code></a> 实现的。</p>
+<p><code>new</code> 命令包含 3 个参数,name、template 和 mode。</p>
+<pre><code class="language-sh">wasm-pack new &lt;name&gt; --template &lt;template&gt; --mode &lt;normal|noinstall|force&gt;
+</code></pre>
+<p>默认的模板是 <a href="https://github.com/rustwasm/wasm-pack-template"><code>rustwasm/wasm-pack-template</code></a>.</p>
+<h2 id="name"><a class="header" href="#name">Name</a></h2>
+<p><code>wasm-pack new</code> 必须指定一个项目名称:</p>
+<pre><code class="language-sh">wasm-pack new myproject
+</code></pre>
+<h2 id="template"><a class="header" href="#template">Template</a></h2>
+<p><code>wasm-pack new</code> 可以用 <code>--template</code> 参数指定一个模板:</p>
+<pre><code class="language-sh">wasm-pack new myproject --template https://github.com/rustwasm/wasm-pack-template
+</code></pre>
+<p>模板需要是一个实现了 <a href="https://github.com/ashleygwilliams/cargo-generate"><code>cargo-generate</code></a> 的 git 仓库地址。</p>
+<h2 id="mode"><a class="header" href="#mode">Mode</a></h2>
+<p><code>wasm-pack new</code> mode 参数用来控制 <code>wasm-pack</code> 依赖工具的安装模式:</p>
+<pre><code class="language-sh">wasm-pack new myproject --mode noinstall
+</code></pre>
+<p>可选值为 <code>normal</code>, <code>noinstall</code> 和 <code>force</code>，默认情况下是 <code>normal</code></p>
+<p><code>noinstall</code> 意味着 <code>wasm-pack</code> 不会安装依赖工具。
+如果在使用 <code>wasm-pack</code> 时找不到所需的工具，就会报错。</p>
+<p><code>force</code> 意味着 <code>wasm-pack</code> 不检查本地的 Rust 版本。
+如果本地的 Rust 版本不符合要求，在运行 <code>wasm-pack</code> 命令时将报错。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="next" href="QuickStart.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="../commands/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -156,8 +172,8 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="next" href="QuickStart.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="../commands/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
             </nav>
 
@@ -166,12 +182,12 @@
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
     </body>

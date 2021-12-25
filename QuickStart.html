@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>概览 - Hello wasm-pack CN</title>
+        <title>快速开始 - Hello wasm-pack CN</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 概览</a></li><li class="chapter-item expanded "><a href="QuickStart.html"><strong aria-hidden="true">2.</strong> 快速开始</a></li><li class="chapter-item expanded "><a href="commands/index.html"><strong aria-hidden="true">3.</strong> 命令</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="commands/new.html"><strong aria-hidden="true">3.1.</strong> new</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 概览</a></li><li class="chapter-item expanded "><a href="QuickStart.html" class="active"><strong aria-hidden="true">2.</strong> 快速开始</a></li><li class="chapter-item expanded "><a href="commands/index.html"><strong aria-hidden="true">3.</strong> 命令</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="commands/new.html"><strong aria-hidden="true">3.1.</strong> new</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,20 +134,25 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p><img src="https://rustwasm.github.io/wasm-pack/public/img/wasm-ferris.png" alt="wasm ferris" /></p>
-<h1 style="text-align: center;">欢迎来到 <code>wasm-pack</code> 文档!</h1>
-<p>原文地址 <a href="https://rustwasm.github.io/docs/wasm-pack/">https://rustwasm.github.io/docs/wasm-pack/</a></p>
-<p>本工具旨在成为一个在浏览器、Node.js 环境中使用 Rust 的一站式工具</p>
-<p><code>wasm-pack</code> 可以将 Rust 代码打包为 WebAssembly npm 包。
-可以上传到 npm 仓库，也可以集成进现有的 JavaScript 工作流中，例如 <a href="https://webpack.js.org/">webpack</a></p>
-<p>这个项目是 <a href="https://github.com/rustwasm/team">rust-wasm</a> 的一部分. 你可以在该项目的仓库中了解到更多信息</p>
-<p><img src="https://github.com/rustwasm/wasm-pack/raw/master/demo.gif" alt="demo" /></p>
+                        <h1 id="quickstart"><a class="header" href="#quickstart">Quickstart</a></h1>
+<ol>
+<li>使用 <a href="https://rustup.rs/"><code>rustup</code></a> 安装 <code>rust</code></li>
+<li>安装 <a href="https://rustwasm.github.io/wasm-pack/installer/"><code>wasm-pack</code></a></li>
+<li>运行 <code>wasm-pack new hello-wasm</code></li>
+<li><code>cd hello-wasm</code></li>
+<li>运行 <code>wasm-pack build</code></li>
+<li>这将在 <code>pkg</code> 文件夹下生成打包的文件，包括 wasm、js bridge、ts defines 和 package.json</li>
+<li>如果要上传到 npm 仓库，可以运行 <code>wasm-pack publish</code>。如果需要登录的话，可以使用 <code>wasm-pack login</code> 来登录 npm 仓库</li>
+</ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="next" href="QuickStart.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="commands/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -156,7 +161,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="next" href="QuickStart.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="commands/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
