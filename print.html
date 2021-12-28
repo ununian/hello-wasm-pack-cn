@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 概览</a></li><li class="chapter-item expanded "><a href="QuickStart.html"><strong aria-hidden="true">2.</strong> 快速开始</a></li><li class="chapter-item expanded "><a href="commands/index.html"><strong aria-hidden="true">3.</strong> 命令</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="commands/new.html"><strong aria-hidden="true">3.1.</strong> new</a></li><li class="chapter-item expanded "><a href="commands/build.html"><strong aria-hidden="true">3.2.</strong> build</a></li><li class="chapter-item expanded "><a href="commands/test.html"><strong aria-hidden="true">3.3.</strong> test</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 概览</a></li><li class="chapter-item expanded "><a href="QuickStart.html"><strong aria-hidden="true">2.</strong> 快速开始</a></li><li class="chapter-item expanded "><a href="commands/index.html"><strong aria-hidden="true">3.</strong> 命令</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="commands/new.html"><strong aria-hidden="true">3.1.</strong> new</a></li><li class="chapter-item expanded "><a href="commands/build.html"><strong aria-hidden="true">3.2.</strong> build</a></li><li class="chapter-item expanded "><a href="commands/test.html"><strong aria-hidden="true">3.3.</strong> test</a></li><li class="chapter-item expanded "><a href="commands/pack-and-publish.html"><strong aria-hidden="true">3.4.</strong> pack 和 publish</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -316,6 +316,31 @@ wasm-pack test crates/foo --firefox --headless --lib diff::tests
 # 和上面一样，但是只运行包含 &quot;replace&quot; 的测试
 wasm-pack test crates/foo --firefox --headless --lib diff::tests::replace
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="pack-和-publish"><a class="header" href="#pack-和-publish">pack 和 publish</a></h1>
+<p>这 2 个命令是 npm 同名命令的替代品，主要是在不安装 nodejs 的情况下使用打包 npm 包和发布 npm 包。</p>
+<p><code>pack</code>命令用来从 pkg 文件夹中创建一个 npm 包，就是一个 zip 文件。</p>
+<p><code>publish</code>命令用来将 pkg 文件推送到 npm 仓库。</p>
+<p>可以在下面 2 个 npm 文档中获取到命令的更多信息。</p>
+<ul>
+<li><a href="https://docs.npmjs.com/cli/pack"><code>npm pack</code></a></li>
+<li><a href="https://docs.npmjs.com/cli/publish"><code>npm publish</code></a></li>
+</ul>
+<p>通常情况下这 2 个命令都会使用 pkg 文件夹，当然你也可以指定其他文件夹（需要是 pkg 文件夹或者 pkg 文件夹的父文件夹）。</p>
+<pre><code>$ wasm-pack pack myproject/pkg
+| 🎒  packed up your package!
+$ wasm-pack pack myproject
+| 🎒  packed up your package!
+</code></pre>
+<p>如果你指定了一个不符合要求的路径，会得到报错：</p>
+<pre><code>$ wasm-pack pack myproject/src/
+Unable to find the pkg directory at path 'myproject/src/', or in a child directory of 'myproject/src/'
+</code></pre>
+<p>如果你不指定路径，就会使用当前文件夹。</p>
+<h2 id="推送一个包含-tag-的包"><a class="header" href="#推送一个包含-tag-的包">推送一个包含 Tag 的包</a></h2>
+<p>使用 <code>--tag</code> 参数可以指定一个包的 tag，例如：</p>
+<pre><code>wasm-pack publish --tag next
+</code></pre>
+<p>默认情况下是使用 <code>latest</code> tag。在 npm 的文档上了解更多关于 <a href="https://docs.npmjs.com/cli/dist-tag">Tag 的信息</a>。</p>
 
                     </main>
 
