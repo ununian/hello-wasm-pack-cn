@@ -41,48 +41,36 @@ wasm-pack build --out-name index
 # index.d.ts  index.js  index_bg.d.ts  index_bg.wasm  package.json  README.md
 ```
 
-## 生成配置
+## Profile
 
-The `build` command accepts an optional profile argument: one of `--dev`,
-`--profiling`, or `--release`. If none is supplied, then `--release` is used.
+`build`命令还能修改编译模式，用来控制是否启用调试断言，是否生成调试信息，是否启用优化。下面是各个配置的区别：
 
-This controls whether debug assertions are enabled, debug info is generated, and
-which (if any) optimizations are enabled.
+| 配置          | 调试断言 | 调试信息 | 编译优化 | 备注                                 |
+| ------------- | -------- | -------- | -------- | ------------------------------------ |
+| `--dev`       | Yes      | Yes      | No       | 用于开发和调试                       |
+| `--profiling` | No       | Yes      | Yes      | 用于分析性能问题                     |
+| `--release`   | No       | No       | Yes      | 一般用于发布到生成环境，这个时默认值 |
 
-| Profile       | Debug Assertions | Debug Info | Optimizations | Notes                                                       |
-| ------------- | ---------------- | ---------- | ------------- | ----------------------------------------------------------- |
-| `--dev`       | Yes              | Yes        | No            | Useful for development and debugging.                       |
-| `--profiling` | No               | Yes        | Yes           | Useful when profiling and investigating performance issues. |
-| `--release`   | No               | No         | Yes           | Useful for shipping to production.                          |
-
-The `--dev` profile will build the output package using cargo's [default
-non-release profile][cargo-profile-sections-documentation]. Building this way is
-faster but applies few optimizations to the output, and enables debug assertions
-and other runtime correctness checks. The `--profiling` and `--release` profiles
-use cargo's release profile, but the former enables debug info as well, which
-helps when investigating performance issues in a profiler.
-
-The exact meaning of the profile flags may evolve as the platform matures.
+`--dev`配置相当于使用 cargo 的 [default
+non-release profile][cargo-profile-sections-documentation]，编译的速度很快，但是代码基本上不会被优化，并且会启用调试断言（ debug assertions ）和运行时检测（runtime correctness checks）。`--profiling`和`--release`配置相当于使用 cargo 的 release 配置，`--profiling`也能实现调试，可以帮助我们排查性能问题。
 
 [cargo-profile-sections-documentation]: https://doc.rust-lang.org/cargo/reference/manifest.html#the-profile-sections
 
 ## Target
 
-The `build` command accepts a `--target` argument. This will customize the JS
-that is emitted and how the WebAssembly files are instantiated and loaded. For
-more documentation on the various strategies here, see the [documentation on
-using the compiled output][deploy].
+`--target` 参数用控制生成的胶水 JS 文件如何加载和实例化`WebAssembly`。
+关于生成各种策列详见下表和[documentation on using the compiled output][deploy]。
 
 ```
 wasm-pack build --target nodejs
 ```
 
-| Option                       | Usage                           | Description                                                                                                                                                                                 |
-| ---------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| _not specified_ or `bundler` | [Bundler][bundlers]             | Outputs JS that is suitable for interoperation with a Bundler like Webpack. You'll `import` the JS and the `module` key is specified in `package.json`. `sideEffects: false` is by default. |
-| `nodejs`                     | [Node.js][deploy-nodejs]        | Outputs JS that uses CommonJS modules, for use with a `require` statement. `main` key in `package.json`.                                                                                    |
-| `web`                        | [Native in browser][deploy-web] | Outputs JS that can be natively imported as an ES module in a browser, but the WebAssembly must be manually instantiated and loaded.                                                        |
-| `no-modules`                 | [Native in browser][deploy-web] | Same as `web`, except the JS is included on a page and modifies global state, and doesn't support as many `wasm-bindgen` features as `web`                                                  |
+| 可选值              | 目标平台                        | 描述                                                                                                                                                                            |
+| ------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 未指定或者`bundler` | [Bundler][bundlers]             | 生成 ES Module 格式的 JS 文件。主要适用于 webpack、rollup 等打包器。使用的时候可以使用 `import` 关键字直接引入。会在 `package.json` 生成 `module` 字段和 `sideEffects: false`。 |
+| `nodejs`            | [Node.js][deploy-nodejs]        | 生成 CommonJS 格式的 JS 文件，主要用于 nodejs。使用 `require`关键字引入。会在 `package.json` 中生成 `main` 字段。                                                               |
+| `web`               | [Native in browser][deploy-web] | 生成可以直接在浏览器中使用的 ESModule JS 文件，但是 WebAssembly 必须手动加载和实例化。                                                                                          |
+| `no-modules`        | [Native in browser][deploy-web] | 和`web`一样可以直接在浏览器中使用，但是直接注入在全局变量中，不支持`wasm-bindgen`中的很多功能。                                                                                 |
 
 [deploy]: https://rustwasm.github.io/docs/wasm-bindgen/reference/deployment.html
 [bundlers]: https://rustwasm.github.io/docs/wasm-bindgen/reference/deployment.html#bundlers
@@ -91,39 +79,34 @@ wasm-pack build --target nodejs
 
 ## Scope
 
-The init command also accepts an optional `--scope` argument. This will scope
-your package name, which is useful if your package name might conflict with
-something in the public registry. For example:
+主要用于发布包含 scope 的 npm 包。
+
+例如下面的命令会让得到`package.json`的`name`字段为`@test/js-hello-world`，在 npm 的文档中了解[更多][npm-scope-documentation]。
 
 ```
 wasm-pack build examples/js-hello-world --scope test
 ```
 
-This command would create a `package.json` file for a package called
-`@test/js-hello-world`. For more information about scoping, you can refer to
-the npm documentation [here][npm-scope-documentation].
-
 [npm-scope-documentation]: https://docs.npmjs.com/misc/scope
 
 ## Mode
 
-The `build` command accepts an optional `--mode` argument.
+`--model`用来控制是否安装`wasm-bindgen`。
 
 ```
 wasm-pack build examples/js-hello-world --mode no-install
 ```
 
-| Option       | Description                                                                            |
-| ------------ | -------------------------------------------------------------------------------------- |
-| `no-install` | `wasm-pack init` implicitly and create wasm binding without installing `wasm-bindgen`. |
-| `normal`     | do all the stuffs of `no-install` with installed `wasm-bindgen`.                       |
+| Option       | Description                               |
+| ------------ | ----------------------------------------- |
+| `no-install` | `wasm-pack init` 不会安装 `wasm-bindgen`. |
+| `normal`     | 会安装 `wasm-bindgen`.                    |
 
-## Extra options
+## 额外参数
 
-The `build` command can pass extra options straight to `cargo build` even if
-they are not supported in wasm-pack. To use them simply add the extra arguments
-at the very end of your command, just as you would for `cargo build`. For
-example, to build the previous example using cargo's offline feature:
+`build` 命令不支持除了上面外的其他参数。如果你想给 `cargo build` 传递参数，可以在命令最后附加上需要传递的参数。
+
+例如要使用 `cargo` 的离线功能，可以这样写：
 
 ```
 wasm-pack build examples/js-hello-world --mode no-install -- --offline
@@ -131,6 +114,4 @@ wasm-pack build examples/js-hello-world --mode no-install -- --offline
 
 <hr style="font-size: 1.5em; margin-top: 2.5em"/>
 
-<sup id="footnote-0">0</sup> If you need to include additional assets in the pkg
-directory and your NPM package, we intend to have a solution for your use case
-soon. [↩](#wasm-pack-build)
+<sup id="footnote-0">0</sup> 目前还不支持在 pkg 文件夹或者 npm 包中包含其他额外的文件，我们会尽快推出解决方案。 [↩](#wasm-pack-build)
