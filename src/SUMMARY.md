@@ -6,3 +6,4 @@
   - [new](./commands/new.md)
   - [build](./commands/build.md)
   - [test](./commands/test.md)
+  - [pack 和 publish](./commands/pack-and-publish.md)
