@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>new - Hello wasm-pack CN</title>
+        <title>build - Hello wasm-pack CN</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> 概览</a></li><li class="chapter-item expanded "><a href="../QuickStart.html"><strong aria-hidden="true">2.</strong> 快速开始</a></li><li class="chapter-item expanded "><a href="../commands/index.html"><strong aria-hidden="true">3.</strong> 命令</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../commands/new.html" class="active"><strong aria-hidden="true">3.1.</strong> new</a></li><li class="chapter-item expanded "><a href="../commands/build.html"><strong aria-hidden="true">3.2.</strong> build</a></li><li class="chapter-item expanded "><a href="../commands/test.html"><strong aria-hidden="true">3.3.</strong> test</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> 概览</a></li><li class="chapter-item expanded "><a href="../QuickStart.html"><strong aria-hidden="true">2.</strong> 快速开始</a></li><li class="chapter-item expanded "><a href="../commands/index.html"><strong aria-hidden="true">3.</strong> 命令</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../commands/new.html"><strong aria-hidden="true">3.1.</strong> new</a></li><li class="chapter-item expanded "><a href="../commands/build.html" class="active"><strong aria-hidden="true">3.2.</strong> build</a></li><li class="chapter-item expanded "><a href="../commands/test.html"><strong aria-hidden="true">3.3.</strong> test</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,39 +134,80 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="wasm-pack-new"><a class="header" href="#wasm-pack-new">wasm-pack new</a></h1>
-<p><code>wasm-pack new</code> 命令将会为你创建一个新的 RustWasm 项目，内部是使用 <a href="https://github.com/ashleygwilliams/cargo-generate"><code>cargo-generate</code></a> 实现的。</p>
-<p><code>new</code> 命令包含 3 个参数,name、template 和 mode。</p>
-<pre><code class="language-sh">wasm-pack new &lt;name&gt; --template &lt;template&gt; --mode &lt;normal|noinstall|force&gt;
+                        <h1 id="wasm-pack-build"><a class="header" href="#wasm-pack-build">wasm-pack build</a></h1>
+<p><code>wasm-pack build</code> 命令将会生成在 JavaScript 中使用 wasm 的胶水文件，以及推送到 npm 仓库所需的文件。</p>
+<p><code>wasm-pack build</code> 命令将会在 pkg 文件夹下生成，编译后的 wasm 二进制文件，JavaScript 胶水文件，以及推送到 npm 仓库所需的 package.json 和 README.md</p>
+<p><code>pkg</code> 文件夹默认会包含在 <code>.gitignore</code> 中，不会被 git 工具跟踪。</p>
+<h2 id="path"><a class="header" href="#path">Path</a></h2>
+<p><code>path</code> 可以指定命令运行的文件夹（需要包含 Cargo.toml），如果没有指定的话，会在当前文件夹下运行命令:</p>
+<pre><code class="language-sh">wasm-pack build examples/js-hello-world
 </code></pre>
-<p>默认的模板是 <a href="https://github.com/rustwasm/wasm-pack-template"><code>rustwasm/wasm-pack-template</code></a>.</p>
-<h2 id="name"><a class="header" href="#name">Name</a></h2>
-<p><code>wasm-pack new</code> 必须指定一个项目名称:</p>
-<pre><code class="language-sh">wasm-pack new myproject
+<h2 id="输出文件夹"><a class="header" href="#输出文件夹">输出文件夹</a></h2>
+<p>默认情况下，<code>wasm-pack</code> 会在当前目录下生成一个名为 <code>pkg</code> 的文件夹，你也可以使用 <code>--out-dir</code> 参数指定输出文件夹，例如:</p>
+<p>By default, <code>wasm-pack</code> will generate a directory for it's build output called <code>pkg</code>.
+If you'd like to customize this you can use the <code>--out-dir</code> flag.</p>
+<pre><code class="language-sh">wasm-pack build --out-dir out
 </code></pre>
-<h2 id="template"><a class="header" href="#template">Template</a></h2>
-<p><code>wasm-pack new</code> 可以用 <code>--template</code> 参数指定一个模板:</p>
-<pre><code class="language-sh">wasm-pack new myproject --template https://github.com/rustwasm/wasm-pack-template
+<h2 id="文件名前缀"><a class="header" href="#文件名前缀">文件名前缀</a></h2>
+<p><code>--out-name</code> 可以指定输出文件的前缀，如果没有指定，将会使用当前项目名作为前缀。</p>
+<p>如果我们的 carte 名字时 <code>dom</code> 的话：</p>
+<pre><code class="language-sh">wasm-pack build
+# will produce files
+# dom.d.ts  dom.js  dom_bg.d.ts  dom_bg.wasm  package.json  README.md
+
+wasm-pack build --out-name index
+# will produce files
+# index.d.ts  index.js  index_bg.d.ts  index_bg.wasm  package.json  README.md
 </code></pre>
-<p>模板需要是一个实现了 <a href="https://github.com/ashleygwilliams/cargo-generate"><code>cargo-generate</code></a> 的 git 仓库地址。</p>
+<h2 id="profile"><a class="header" href="#profile">Profile</a></h2>
+<p><code>build</code>命令还能修改编译模式，用来控制是否启用调试断言，是否生成调试信息，是否启用优化。下面是各个配置的区别：</p>
+<table><thead><tr><th>配置</th><th>调试断言</th><th>调试信息</th><th>编译优化</th><th>备注</th></tr></thead><tbody>
+<tr><td><code>--dev</code></td><td>Yes</td><td>Yes</td><td>No</td><td>用于开发和调试</td></tr>
+<tr><td><code>--profiling</code></td><td>No</td><td>Yes</td><td>Yes</td><td>用于分析性能问题</td></tr>
+<tr><td><code>--release</code></td><td>No</td><td>No</td><td>Yes</td><td>一般用于发布到生成环境，这个时默认值</td></tr>
+</tbody></table>
+<p><code>--dev</code>配置相当于使用 cargo 的 <a href="https://doc.rust-lang.org/cargo/reference/manifest.html#the-profile-sections">default
+non-release profile</a>，编译的速度很快，但是代码基本上不会被优化，并且会启用调试断言（ debug assertions ）和运行时检测（runtime correctness checks）。<code>--profiling</code>和<code>--release</code>配置相当于使用 cargo 的 release 配置，<code>--profiling</code>也能实现调试，可以帮助我们排查性能问题。</p>
+<h2 id="target"><a class="header" href="#target">Target</a></h2>
+<p><code>--target</code> 参数用控制生成的胶水 JS 文件如何加载和实例化<code>WebAssembly</code>。
+关于生成各种策列详见下表和<a href="https://rustwasm.github.io/docs/wasm-bindgen/reference/deployment.html">documentation on using the compiled output</a>。</p>
+<pre><code>wasm-pack build --target nodejs
+</code></pre>
+<table><thead><tr><th>可选值</th><th>目标平台</th><th>描述</th></tr></thead><tbody>
+<tr><td>未指定或者<code>bundler</code></td><td><a href="https://rustwasm.github.io/docs/wasm-bindgen/reference/deployment.html#bundlers">Bundler</a></td><td>生成 ES Module 格式的 JS 文件。主要适用于 webpack、rollup 等打包器。使用的时候可以使用 <code>import</code> 关键字直接引入。会在 <code>package.json</code> 生成 <code>module</code> 字段和 <code>sideEffects: false</code>。</td></tr>
+<tr><td><code>nodejs</code></td><td><a href="https://rustwasm.github.io/docs/wasm-bindgen/reference/deployment.html#nodejs">Node.js</a></td><td>生成 CommonJS 格式的 JS 文件，主要用于 nodejs。使用 <code>require</code>关键字引入。会在 <code>package.json</code> 中生成 <code>main</code> 字段。</td></tr>
+<tr><td><code>web</code></td><td><a href="https://rustwasm.github.io/docs/wasm-bindgen/reference/deployment.html#without-a-bundler">Native in browser</a></td><td>生成可以直接在浏览器中使用的 ESModule JS 文件，但是 WebAssembly 必须手动加载和实例化。</td></tr>
+<tr><td><code>no-modules</code></td><td><a href="https://rustwasm.github.io/docs/wasm-bindgen/reference/deployment.html#without-a-bundler">Native in browser</a></td><td>和<code>web</code>一样可以直接在浏览器中使用，但是直接注入在全局变量中，不支持<code>wasm-bindgen</code>中的很多功能。</td></tr>
+</tbody></table>
+<h2 id="scope"><a class="header" href="#scope">Scope</a></h2>
+<p>主要用于发布包含 scope 的 npm 包。</p>
+<p>例如下面的命令会让得到<code>package.json</code>的<code>name</code>字段为<code>@test/js-hello-world</code>，在 npm 的文档中了解<a href="https://docs.npmjs.com/misc/scope">更多</a>。</p>
+<pre><code>wasm-pack build examples/js-hello-world --scope test
+</code></pre>
 <h2 id="mode"><a class="header" href="#mode">Mode</a></h2>
-<p><code>wasm-pack new</code> mode 参数用来控制 <code>wasm-pack</code> 依赖工具的安装模式:</p>
-<pre><code class="language-sh">wasm-pack new myproject --mode noinstall
+<p><code>--model</code>用来控制是否安装<code>wasm-bindgen</code>。</p>
+<pre><code>wasm-pack build examples/js-hello-world --mode no-install
 </code></pre>
-<p>可选值为 <code>normal</code>, <code>noinstall</code> 和 <code>force</code>，默认情况下是 <code>normal</code></p>
-<p><code>noinstall</code> 意味着 <code>wasm-pack</code> 不会安装依赖工具。
-如果在使用 <code>wasm-pack</code> 时找不到所需的工具，就会报错。</p>
-<p><code>force</code> 意味着 <code>wasm-pack</code> 不检查本地的 Rust 版本。
-如果本地的 Rust 版本不符合要求，在运行 <code>wasm-pack</code> 命令时将报错。</p>
+<table><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>no-install</code></td><td><code>wasm-pack init</code> 不会安装 <code>wasm-bindgen</code>.</td></tr>
+<tr><td><code>normal</code></td><td>会安装 <code>wasm-bindgen</code>.</td></tr>
+</tbody></table>
+<h2 id="额外参数"><a class="header" href="#额外参数">额外参数</a></h2>
+<p><code>build</code> 命令不支持除了上面外的其他参数。如果你想给 <code>cargo build</code> 传递参数，可以在命令最后附加上需要传递的参数。</p>
+<p>例如要使用 <code>cargo</code> 的离线功能，可以这样写：</p>
+<pre><code>wasm-pack build examples/js-hello-world --mode no-install -- --offline
+</code></pre>
+<hr style="font-size: 1.5em; margin-top: 2.5em"/>
+<p><sup id="footnote-0">0</sup> 目前还不支持在 pkg 文件夹或者 npm 包中包含其他额外的文件，我们会尽快推出解决方案。 <a href="#wasm-pack-build">↩</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../commands/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../commands/new.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../commands/build.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../commands/test.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -175,10 +216,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../commands/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../commands/new.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../commands/build.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../commands/test.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
