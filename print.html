@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 概览</a></li><li class="chapter-item expanded "><a href="QuickStart.html"><strong aria-hidden="true">2.</strong> 快速开始</a></li><li class="chapter-item expanded "><a href="commands/index.html"><strong aria-hidden="true">3.</strong> 命令</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="commands/new.html"><strong aria-hidden="true">3.1.</strong> new</a></li><li class="chapter-item expanded "><a href="commands/build.html"><strong aria-hidden="true">3.2.</strong> build</a></li><li class="chapter-item expanded "><a href="commands/test.html"><strong aria-hidden="true">3.3.</strong> test</a></li><li class="chapter-item expanded "><a href="commands/pack-and-publish.html"><strong aria-hidden="true">3.4.</strong> pack 和 publish</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 概览</a></li><li class="chapter-item expanded "><a href="QuickStart.html"><strong aria-hidden="true">2.</strong> 快速开始</a></li><li class="chapter-item expanded "><a href="commands/index.html"><strong aria-hidden="true">3.</strong> 命令</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="commands/new.html"><strong aria-hidden="true">3.1.</strong> new</a></li><li class="chapter-item expanded "><a href="commands/build.html"><strong aria-hidden="true">3.2.</strong> build</a></li><li class="chapter-item expanded "><a href="commands/test.html"><strong aria-hidden="true">3.3.</strong> test</a></li><li class="chapter-item expanded "><a href="commands/pack-and-publish.html"><strong aria-hidden="true">3.4.</strong> pack 和 publish</a></li></ol></li><li class="chapter-item expanded "><a href="tutorials/index.html"><strong aria-hidden="true">4.</strong> 教程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorials/hybrid-applications-with-webpack/index.html"><strong aria-hidden="true">4.1.</strong> Hybrid applications with Webpack</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorials/hybrid-applications-with-webpack/getting-started.html"><strong aria-hidden="true">4.1.1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="tutorials/hybrid-applications-with-webpack/using-your-library.html"><strong aria-hidden="true">4.1.2.</strong> Using your library</a></li></ol></li><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/index.html"><strong aria-hidden="true">4.2.</strong> npm browser packages</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/getting-started.html"><strong aria-hidden="true">4.2.1.</strong> Getting started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/getting-started/manual-setup.html"><strong aria-hidden="true">4.2.1.1.</strong> Manual Setup</a></li></ol></li><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/template-deep-dive/index.html"><strong aria-hidden="true">4.2.2.</strong> Template deep dive</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/template-deep-dive/cargo-toml.html"><strong aria-hidden="true">4.2.2.1.</strong> Cargo.toml</a></li><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/template-deep-dive/src-lib-rs.html"><strong aria-hidden="true">4.2.2.2.</strong> src/lib.rs</a></li><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/template-deep-dive/src-utils-rs.html"><strong aria-hidden="true">4.2.2.3.</strong> src/utils.rs</a></li><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/template-deep-dive/wee_alloc.html"><strong aria-hidden="true">4.2.2.4.</strong> wee_alloc</a></li><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/template-deep-dive/tests-web-rs.html"><strong aria-hidden="true">4.2.2.5.</strong> tests/web.rs</a></li></ol></li><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/building-your-project.html"><strong aria-hidden="true">4.2.3.</strong> Building your project</a></li><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/testing-your-project.html"><strong aria-hidden="true">4.2.4.</strong> Testing your project</a></li><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/packaging-and-publishing.html"><strong aria-hidden="true">4.2.5.</strong> Packaging and publishing</a></li><li class="chapter-item expanded "><a href="tutorials/npm-browser-packages/using-your-library.html"><strong aria-hidden="true">4.2.6.</strong> Using your library</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="cargo-toml-configuration.html"><strong aria-hidden="true">5.</strong> Cargo.toml Configuration</a></li><li class="chapter-item expanded "><a href="contributing.html"><strong aria-hidden="true">6.</strong> Contributing</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -341,6 +341,97 @@ Unable to find the pkg directory at path 'myproject/src/', or in a child directo
 <pre><code>wasm-pack publish --tag next
 </code></pre>
 <p>默认情况下是使用 <code>latest</code> tag。在 npm 的文档上了解更多关于 <a href="https://docs.npmjs.com/cli/dist-tag">Tag 的信息</a>。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="教程"><a class="header" href="#教程">教程</a></h1>
+<p>我们有 2 个教程帮你入门 <code>wasm-pack</code>:</p>
+<ul>
+<li>如果你想创建和发布一个 npm 包: <a href="tutorials/npm-browser-packages/index.html">npm browser packages</a></li>
+<li>如果你想在使用 Webpack 的项目中开发 wasm 库: <a href="tutorials/hybrid-applications-with-webpack/index.html">在 webpack 中使用</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="在-webpack-中使用"><a class="header" href="#在-webpack-中使用">在 webpack 中使用</a></h1>
+<p>本教程主要目的是介绍如何使用 <a href="https://github.com/rustwasm/rust-webpack-template"><code>rust-webpack-template</code></a> 模板和 <code>wasm-pack</code> 工作流创建一个示例应用。</p>
+<p>本教程主要是面销 WebAssembly 和 Rust 的初学者，不需要了解非常多的 Rust 知识。</p>
+<p>但是请先阅读和以下文档：</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="开始"><a class="header" href="#开始">开始</a></h1>
+<p>你可以使用 <a href="https://github.com/rustwasm/rust-webpack-template">rustwasm webpack-template</a> 来创建一个 Rust-WebAssembly 的 webpack 项目。</p>
+<p>运行:</p>
+<pre><code>npm init rust-webpack my-app
+</code></pre>
+<p>后面那个参数是你的项目名称。运行完成后，你会得到一个新项目的文件夹。我们将会在本章中进一步讨论此模板中包含的内容。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="运行代码"><a class="header" href="#运行代码">运行代码</a></h1>
+<p>本部分教程将会指导你如使用 <a href="https://webpack.js.org/">webpack</a> 打包 JavaScript 和 WebAssembly ，并在浏览器里面使用。</p>
+<h2 id="项目结构"><a class="header" href="#项目结构">项目结构</a></h2>
+<ul>
+<li><code>.gitignore</code>: git 提交时忽略 <code>node_modules</code></li>
+<li><code>README.md</code>:就是本文</li>
+<li><code>index.html</code>: 引用 <code>src/index.js</code> 的 html 文件</li>
+<li><code>js/index.js</code>: 演示了如何引入和使用 wasm 文件</li>
+<li><code>package.json</code> and <code>package-lock.json</code>:
+<ul>
+<li>包含了下面这些依赖:
+<ul>
+<li><a href="https://www.npmjs.com/package/webpack"><code>webpack</code></a></li>
+<li><a href="https://www.npmjs.com/package/webpack-cli"><code>webpack-cli</code></a></li>
+<li><a href="https://www.npmjs.com/package/webpack-dev-server"><code>webpack-dev-server</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>webpack.config.js</code>: webpack 配置</li>
+<li><code>crate/src/lib.rs</code>: Rust 代码</li>
+</ul>
+<h2 id="your-rust-crate"><a class="header" href="#your-rust-crate">Your Rust Crate</a></h2>
+<p>本项目包含了一个示例 crate。</p>
+<p>在 <code>crate/src/lib.rs</code> 中，我们定义了一个 <code>main_js</code> 函数，并通过指定。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Called by our JS entry point to run the example.
+#[wasm_bindgen]
+pub fn run() -&gt; Result&lt;(), JsValue&gt; {
+    set_panic_hook();
+
+    // ...
+    let p: web_sys::Node = document.create_element(&quot;p&quot;)?.into();
+    p.set_text_content(Some(&quot;Hello from Rust, WebAssembly, and Webpack!&quot;));
+    // ...
+
+    Ok(())
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Now, open up the <code>js/index.js</code> file. We see our Rust-generated wasm <code>run</code> function being
+called inside our JS file.</p>
+<pre><code class="language-js">import('../crate/pkg').then((module) =&gt; {
+  module.run();
+});
+</code></pre>
+<h2 id="run-the-project"><a class="header" href="#run-the-project">Run The Project</a></h2>
+<p>To generate our Rust-compiled to wasm code, in the root directory we run:</p>
+<pre><code class="language-bash">npm run build
+</code></pre>
+<p>This will create our bundled JavaScript module in a new directory <code>dist</code>.</p>
+<p>We should be ready to run our project now!
+In the root directory, we'll run:</p>
+<pre><code class="language-bash">npm start
+</code></pre>
+<p>Then in a web browser navigate to <code>http://localhost:8080</code> and you should be greeted
+with text in the body of the page that says &quot;Hello from Rust, WebAssembly, and Webpack!&quot;</p>
+<p>If you did congrats! You've successfully used the rust-webpack template!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="npm-browser-packages"><a class="header" href="#npm-browser-packages">npm browser packages</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting started</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="manual-setup"><a class="header" href="#manual-setup">Manual Setup</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="template-deep-dive"><a class="header" href="#template-deep-dive">Template deep dive</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cargotoml"><a class="header" href="#cargotoml">Cargo.toml</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="srclibrs"><a class="header" href="#srclibrs">src/lib.rs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="srcutilsrs"><a class="header" href="#srcutilsrs">src/utils.rs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="wee_alloc"><a class="header" href="#wee_alloc">wee_alloc</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="testswebrs"><a class="header" href="#testswebrs">tests/web.rs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="building-your-project"><a class="header" href="#building-your-project">Building your project</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="testing-your-project"><a class="header" href="#testing-your-project">Testing your project</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="packaging-and-publishing"><a class="header" href="#packaging-and-publishing">Packaging and publishing</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="using-your-library"><a class="header" href="#using-your-library">Using your library</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cargotoml-configuration"><a class="header" href="#cargotoml-configuration">Cargo.toml Configuration</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contributing"><a class="header" href="#contributing">Contributing</a></h1>
 
                     </main>
 
